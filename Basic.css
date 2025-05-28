@@ -1,0 +1,57 @@
+  
+        h3{
+            color:darkmagenta;
+             font-variant: small-caps;
+             background-color: rgb(39, 211, 140);
+             padding: 10px;
+             border-radius: 0px;
+             display: inline;
+          
+        }
+        h4{
+            color:crimson;
+            font-size: larger;
+            font-style: var();
+           
+             
+        }
+        #img1{
+            padding-left: 550px;
+            margin-top: -80px;
+        }
+        button{
+            color:red;
+            background-color:chartreuse;
+            border-radius:500px ;
+            font-size: medium;
+            border-style:dotted;
+           
+            
+        }
+        body{
+            background-color: rgb(132, 198, 198);
+        }
+        #imageContainer{
+            display:none;
+            text-align:left;
+            margin-bottom: 20px;
+
+        }
+        #fact{
+            display:none;
+            color: red;
+            font-weight: bold;
+            margin-left: 200px;
+            margin-top: -150px;
+        }
+        .arrow{
+            font-size: 30px;
+            color:deeppink ;
+        }
+        #img2{
+
+            width:150px;
+            cursor:pointer;
+            border-radius: 50px;
+            border: 2px solid #eee ;
+        }
