@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Gallery with Modal</title>
+  <link rel="stylesheet" href="image.css" >
+</head>
+<body>
+
+  <div class="form-container">
+    <input type="text" id="imgUrl" placeholder="Image URL" />
+    <input type="text" id="imgCaption" placeholder="Caption" />
+    <button onclick="addImage()">Add Image</button>
+  </div>
+
+  <div class="gallery" id="gallery">
+  </div>
+  <div class="modal" id="modal">
+    <span class="close" id="closeBtn">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+  <script src="image.js"></script>
+
+ </body>
+</html>

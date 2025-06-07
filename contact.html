@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="contact.css" >
+</head>
+<body>
+  <h2>Contact Us</h2>
+
+  <div class="box-wrapper">
+    <div class="image-section">
+      <img src="https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/09/contact-center-software-1680x1120-1.jpg?w=1024" alt="Contact Image">
+    </div>
+
+    <form id="contactForm">
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <div id="nameError" class="error"></div>
+
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <div id="emailError" class="error"></div>
+
+      <input type="number" name="phone" placeholder="Phone Number">
+
+      <div class="gender-options">
+        <label><input type="radio" name="gender" value="male"> Male</label>
+        <label><input type="radio" name="gender" value="female"> Female</label>
+      </div>
+
+      <select name="reason">
+        <option value="">Select a reason for contact</option>
+        <option value="support">Support</option>
+        <option value="feedback">Feedback</option>
+        <option value="inquiry">Inquiry</option>
+      </select>
+
+      <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+      <div id="messageError" class="error"></div>
+
+      <input type="submit" value="Submit">
+      <div class="success" id="successMessage"></div>
+    </form>
+  </div>
+
+  <script src="contact.js"></script>
+
+</body>
+</html>
+
+
+
