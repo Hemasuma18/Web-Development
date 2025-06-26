@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Listing</title>
+  <link rel="stylesheet" href="product.css">
+  </head>
+<body>
+  <div class="header">
+    <img src="https://cdn-icons-png.flaticon.com/512/263/263115.png" alt="Shopping Icon">
+    <h1>Welcome to Our Shopping Store!</h1> 
+  </div>
+  <div class="container">
+    <div class="filters">
+      <input type="text" id="searchBar" placeholder="Search products...">
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+        <option value="cosmetics">cosmetics</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Footwear">Footwear</option>
+      </select>
+      <select id="priceFilter">
+        <option value="All">All Prices</option>
+        <option value="0-500">Below/upto ₹500</option>
+        <option value="501-1000">₹501 - ₹1000</option>
+        <option value="1001-999999">Above ₹1000</option>
+      </select>
+      <select id="sortOption">
+        <option value="default">Sort By</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating-desc">Rating: High to Low</option>
+      </select>
+    </div>
+    <div class="products" id="productList"></div>
+  </div>
+   <div id="toast" class="toast">Product added to cart!</div>
+   <script src="product.js"></script> 
+   </body>
+   </html>
