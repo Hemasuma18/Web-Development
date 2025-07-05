@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Place Order</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5faff;
+    }
+    header {
+      background: #1f3b57;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .order-container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .product {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      justify-content: space-between;
+    }
+    .product-left {
+      display: flex;
+      align-items: center;
+    }
+    .product img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+    form {
+      margin-top: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .payment-options label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .upi-options {
+      display: none;
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .submit-btn {
+      margin-top: 20px;
+      background-color: #1f3b57;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #163047;
+    }
+    .remove-btn {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .checkbox {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Review & Place Your Order</h1>
+  <nav>
+    <a href="Ecommerce.html">Home</a>
+    <a href="productpage.html">Products</a>
+    <a href="Wishlist.html">Wishlist</a>
+    <a href="Cart.html">Cart</a>
+    <a href="PlaceOrder.html">Place Order</a>
+  </nav>
+</header>
+
+<div class="order-container" id="orderContainer">
+
+</div>
+
+<div class="order-container">
+  <h2>Delivery Address</h2>
+  <form onsubmit="submitOrder(event)">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required />
+
+    <label for="address">Address</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <label for="city">City</label>
+    <input type="text" id="city" required />
+
+    <label for="pincode">Pincode</label>
+    <input type="text" id="pincode" required />
+
+    <label>Payment Method</label>
+    <div class="payment-options">
+      <label>Cash on Delivery <input type="radio" name="payment" value="COD" onchange="toggleUPIOptions()" required /></label>
+      <label>Online Payment <input type="radio" name="payment" value="Online" onchange="toggleUPIOptions()" required /></label>
+    </div>
+
+    <div class="upi-options" id="upiOptions">
+      <label><input type="radio" name="upi" value="PhonePe" /> PhonePe</label>
+      <label><input type="radio" name="upi" value="GooglePay" /> Google Pay</label>
+      <label><input type="radio" name="upi" value="Paytm" /> Paytm</label>
+    </div>
+
+    <button type="submit" class="submit-btn">Place Order</button>
+    <div id="order-success" style="display:none; text-align:center; padding: 20px;">
+      <div style="display:inline-block; background:#d4edda; color:#155724; padding:15px 25px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+        ✅ Order placed successfully!
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+   const products = [
+  { name: "Smartphone", category: "Electronics", price: 8000, rating: 4.5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXI_WtCA49H3howBbPvPGp-kGWHZ8KjNytVg&s" },
+  { name: "Dress", category: "Clothing", price: 400, rating: 4.2, img: "https://assets.ajio.com/medias/sys_master/root/20250603/0n42/683f29827a6cd4182f7de600/raiyani_enterprise_x_ag_aqua_blue_women_printed_fit_%26_flare_dress.jpg" },
+  { name: "Smart Watch", category: "Electronics", price: 3000, rating: 4.8, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN93Rj9WUiK3G8T8ifCzsbpKC2esoiSPQA9A&s"},
+  { name: "Novel", category: "Books", price: 350, rating: 3.9, img: "https://m.media-amazon.com/images/I/51xwFZin4pL._UF1000,1000_QL80_.jpg" },
+  { name: "Men's Suit", category: "Clothing", price: 1200, rating: 4.6, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSN5npx_YZOqNYktkVbrNYo5DssgI1wH7AW2eiSMq6hM9sb56XHReUyUSwttrrRBZy_sM&usqp=CAU" },
+  { name: "Laptop", category: "Electronics", price: 15000, rating: 4.3, img: "https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1732187805/Croma%20Assets/Computers%20Peripherals/Laptop/Images/311051_0_xkl2ks.png?tr=w-400" },
+  { name: "women's Saree", category:"Clothing",price:1000, rating: 4.0, img:"https://www.distacart.com/cdn/shop/products/JQVrQhH9WX_240x.jpg?v=1686294833" },
+  { name: "Men's T-shirt", category:"Clothing",price: 500, rating: 3.8, img:"https://images.meesho.com/images/products/374206265/6zazs_512.webp"},
+  { name: "Kid's frock", category:"Clothing", price: 600, rating: 4.2, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRue2qEV_8MVl8DKrYgcTpuC5dyAU_YSUe6QpCCqnsikiUAb1SjeWeKZwNe98KN6-3OoT0&usqp=CAU"},
+  { name: "Jewellery", category:"cosmetics", price: 2500, rating: 4.5, img:"https://5.imimg.com/data5/TG/DN/MY-37294786/designer-artificial-jewellery.jpg"},
+  { name: "Biography", category:"Books", price: 800,rating: 4.2,img:"https://m.media-amazon.com/images/I/81y0LXoNs-L._UF1000,1000_QL80_.jpg" },
+  { name: "Earings", category:"cosmetics", price:1000, rating:4.0, img:"https://shoppingyar.com/wp-content/uploads/2021/09/jewellry-34.jpg" },
+  { name: "Slippers", category:"Footwear", price: 300, rating: 3.5, img:"https://4.imimg.com/data4/LD/DI/GLADMIN-2068720/ladies-footwear-wn-706-500x500.png",},
+  { name: "shoes", category:"Footwear", price: 900, rating: 3.9,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSac3ZdJ8aUOaEnsec0w-qiYGass_Hb9sPGaQ&s" },
+  { name: "Bangles", category:"cosmetics", price: 1600, rating: 4.1, img:"https://madeforhers.in/wp-content/uploads/2022/07/MFH-41-49.jpg" },
+  { name: "GreenTea", category:"Groceries", price: 300, rating: 4.2,img:"https://foodcare.in/cdn/shop/files/GREENTEABAG.jpg?v=1725364792&width=1445" },
+  { name: "Rice pack",category:"Groceries",price: 1400, rating: 4.3, img:"https://4.imimg.com/data4/GQ/RU/ANDROID-53192496/product-500x500.jpeg" },
+   { name: "Chudidar",category:"Clothing",price: 750, rating:4.4, img:"https://m.media-amazon.com/images/I/81Q3bmk3RVL._UY1100_.jpg" },
+  { name: "Dry fruits", category:"Groceries",price:450,rating:4.0,img:"https://eatanytime.in/cdn/shop/files/MiniDryFruits-912399.png?v=1714830184" },
+  { name: "Necklace", category:"cosmetics", price:650,rating:3.8,img:"https://www.orra.co.in/media/catalog/product/cache/0223386358b565e9d65c640854c3ad24/o/n/ons23022.jpg" }
+
+
+];
+
+
+  let cartItemNames = JSON.parse(localStorage.getItem("cart")) || [];
+  let cartItems = cartItemNames.map(name => products.find(p => p.name === name)).filter(p => p);
+
+  const container = document.getElementById("orderContainer");
+
+  function renderCart() {
+    container.innerHTML = "";
+    if (cartItems.length === 0) {
+      container.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cartItems.forEach((product, index) => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <div class="product-left">
+            <input type="checkbox" class="checkbox" value="${product.name}" checked />
+            <img src="${product.img}" alt="${product.name}">
+            <div>
+              <h4>${product.name}</h4>
+              <p>Price: ₹${product.price}</p>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+  }
+
+  function removeItem(index) {
+    const removedProduct = cartItems[index].name;
+    cartItems.splice(index, 1);
+    cartItemNames = cartItemNames.filter(name => name !== removedProduct);
+    localStorage.setItem("cart", JSON.stringify(cartItemNames));
+    renderCart();
+  }
+
+  function toggleUPIOptions() {
+    const onlineOption = document.querySelector('input[name="payment"][value="Online"]');
+    const upiOptions = document.getElementById("upiOptions");
+    upiOptions.style.display = onlineOption && onlineOption.checked ? "block" : "none";
+  }
+
+  function submitOrder(event) {
+    event.preventDefault();
+    const selectedNames = [...document.querySelectorAll('.checkbox:checked')].map(cb => cb.value);
+    if (selectedNames.length === 0) {
+      alert("Please select at least one product to place the order.");
+      return;
+    }
+   
+    cartItemNames = cartItemNames.filter(name => !selectedNames.includes(name));
+    localStorage.setItem("cart", JSON.stringify(cartItemNames));
+
+    document.getElementById("order-success").style.display = "block";
+    setTimeout(() => window.location.href = "Ecommerce.html", 2000);
+  }
+
+  renderCart();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
